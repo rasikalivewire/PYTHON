@@ -1,0 +1,19 @@
+1. To find last digit of the number
+2. To remove last digit of the number
+3. To find last 2 digits of the given number
+4.Square the middle digit of a five-digit number
+Input: 54623
+Output: Square of 6 is: 36
+5.BMI Calculator
+Formula
+BMI = weight / (height / 100)^2
+6. Expand the number
+1234 → 1000 + 200 + 30 + 4
+7.Volume of Cylinder
+Formula
+3.14 × radius × radius × height
+8.Volume of Cuboid
+Formula
+length × breadth × height
+9.convert centimeter to meter(100cm=1m)
+10.Input distance and time, calculate speed(S=D/T)
