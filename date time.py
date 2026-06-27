@@ -1,0 +1,14 @@
+from datetime import datetime, date, timedelta
+
+d = datetime.now()
+
+print("1. Current Date & Time :", d)
+print("2. Today's Date       :", date.today())
+print("3. Date Only          :", d.date())
+print("4. Time Only          :", d.time())
+print("5. Formatted Date     :", d.strftime("%d-%m-%Y"))
+print("6. String to Date     :", datetime.strptime("08-06-2026", "%d-%m-%Y"))
+print("7. Add 5 Days         :", d + timedelta(days=5))
+print("8. Timestamp          :", d.timestamp())
+print("9. Weekday            :", d.weekday())
+print("10. Replace Year      :", d.replace(year=2030))
