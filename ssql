@@ -1,0 +1,49 @@
+# MY SQL
+import mysql.connector
+
+mysql = mysql.connector.connect(
+    host='localhost',
+    user='root',
+    password='1234',
+   database='mydbb'
+)
+
+print(mysql)
+c=mysql.cursor()
+#c.execute('CREATE DATABASE mydbb')
+c.execute('USE mydbb')
+#c.execute('create table customer(name varchar(50),age varchar(20))')
+#
+#c.execute('insert into customer(name,age) values("kiwi",18)')
+# c.execute('alter table customer add column role varchar(50)')
+# c.execute('alter table customer drop column role')
+c.execute('update customer set age=30 where name="kiwi"')
+# c.execute('truncate table customer')
+# #c.execute('rename table customer to customers')
+#c.execute('insert into customer(name,age) values("rasi",20)')
+"""customer=[    {"name": "Ragav", "age": 20},
+    {"name": "Kiwii", "age": 18},
+    {"name": "John", "age": 25}
+]
+
+sql = "INSERT INTO customer(name, age) VALUES (%s, %s)"
+
+data = [(s["name"], s["age"]) for s in customer]
+
+c.executemany(sql, data)"""
+c.execute("SELECT * FROM customer")
+'''rows = c.fetchall()
+print(rows)'''
+# Fetch all rows
+'''rows=c.fetchone()
+print(rows)'''
+rows=c.fetchmany()
+for row in rows:
+   print(row)
+#
+# #        tcl commands
+# #commit-cannot be undone
+# c.execute('insert into customer values("rasi",20)')
+# mysql.rollback()
+mysql.commit()
+c.close()
