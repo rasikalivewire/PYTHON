@@ -1,0 +1,79 @@
+#bank
+CREATE DATABASE bank;
+USE bank;
+
+CREATE TABLE accounts (
+    account_no INT PRIMARY KEY,
+    customer_name VARCHAR(50),
+    account_type VARCHAR(20),
+    balance DECIMAL(10,2)
+);
+
+INSERT INTO accounts
+VALUES
+(1001, 'Ravi', 'Savings', 25000),
+(1002, 'Priya', 'Savings', 40000),
+(1003, 'Arun', 'Current', 75000),
+(1004, 'Divya', 'Savings', 18000);
+
+SELECT * FROM accounts;
+
+-- Customers having balance above 30000
+SELECT * FROM accounts
+WHERE balance > 30000;
+
+-- Add money
+UPDATE accounts
+SET balance = balance + 5000
+WHERE account_no = 1001;
+
+-- Withdraw money
+UPDATE accounts
+SET balance = balance - 3000
+WHERE account_no = 1002;
+
+
+
+
+
+
+
+
+#shopping
+CREATE DATABASE shopping;
+USE shopping;
+
+CREATE TABLE products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(50),
+    category VARCHAR(30),
+    price DECIMAL(10,2),
+    quantity INT
+);
+
+INSERT INTO products (product_name, category, price, quantity)
+VALUES
+('Laptop', 'Electronics', 55000, 10),
+('Mobile', 'Electronics', 25000, 20),
+('Keyboard', 'Accessories', 1500, 30),
+('Mouse', 'Accessories', 800, 50),
+('Headphones', 'Accessories', 2500, 15);
+
+SELECT * FROM products;
+
+-- Products above ₹2000
+SELECT * FROM products
+WHERE price > 2000;
+
+-- Sort by price
+SELECT * FROM products
+ORDER BY price DESC;
+
+-- Total products available
+SELECT SUM(quantity) AS total_quantity
+FROM products;
+
+-- Average product price
+SELECT AVG(price) AS average_price
+FROM products;
+SELECT * FROM accounts;
