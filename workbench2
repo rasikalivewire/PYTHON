@@ -1,0 +1,566 @@
+-- ============================================
+-- 1. CREATE DATABASE
+-- ============================================
+
+CREATE DATABASE shopping;
+
+USE shopping;
+
+
+-- ============================================
+-- 2. CREATE TABLE
+-- ============================================
+
+CREATE TABLE products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(50),
+    category VARCHAR(30),
+    price DECIMAL(10,2),
+    quantity INT
+);
+
+
+-- ============================================
+-- 3. INSERT DATA
+-- ============================================
+
+INSERT INTO products
+(product_name, category, price, quantity)
+VALUES
+('Laptop', 'Electronics', 55000, 10),
+('Mobile', 'Electronics', 25000, 20),
+('Keyboard', 'Accessories', 1500, 30),
+('Mouse', 'Accessories', 800, 50),
+('Headphones', 'Accessories', 2500, 15),
+('Monitor', 'Electronics', 18000, 12),
+('Printer', 'Electronics', 12000, 8),
+('USB Cable', 'Accessories', 500, 100),
+('Smart Watch', 'Wearables', 7000, 25),
+('Power Bank', 'Accessories', 1800, 40);
+
+
+-- ============================================
+-- 4. DISPLAY ALL RECORDS
+-- ============================================
+
+SELECT * FROM products;
+
+
+-- ============================================
+-- 5. SELECT SPECIFIC COLUMNS
+-- ============================================
+
+SELECT product_name, price
+FROM products;
+
+
+SELECT product_name, category, price
+FROM products;
+
+
+-- ============================================
+-- 6. WHERE CONDITION
+-- ============================================
+
+SELECT *
+FROM products
+WHERE price > 2000;
+
+
+SELECT *
+FROM products
+WHERE category = 'Electronics';
+
+
+SELECT *
+FROM products
+WHERE quantity < 20;
+
+
+-- ============================================
+-- 7. AND OPERATOR
+-- ============================================
+
+SELECT *
+FROM products
+WHERE price > 5000
+AND quantity > 10;
+
+
+-- ============================================
+-- 8. OR OPERATOR
+-- ============================================
+
+SELECT *
+FROM products
+WHERE category = 'Electronics'
+OR category = 'Wearables';
+
+
+-- ============================================
+-- 9. NOT OPERATOR
+-- ============================================
+
+SELECT *
+FROM products
+WHERE NOT category = 'Accessories';
+
+
+-- ============================================
+-- 10. BETWEEN
+-- ============================================
+
+SELECT *
+FROM products
+WHERE price BETWEEN 1000 AND 10000;
+
+
+-- ============================================
+-- 11. IN
+-- ============================================
+
+SELECT *
+FROM products
+WHERE category IN ('Electronics', 'Wearables');
+
+
+-- ============================================
+-- 12. LIKE
+-- ============================================
+
+-- Product names starting with M
+SELECT *
+FROM products
+WHERE product_name LIKE 'M%';
+
+
+-- Product names ending with e
+SELECT *
+FROM products
+WHERE product_name LIKE '%e';
+
+
+-- Product names containing "oo"
+SELECT *
+FROM products
+WHERE product_name LIKE '%oo%';
+
+
+-- ============================================
+-- 13. ORDER BY
+-- ============================================
+
+-- Lowest to highest price
+SELECT *
+FROM products
+ORDER BY price ASC;
+
+
+-- Highest to lowest price
+SELECT *
+FROM products
+ORDER BY price DESC;
+
+
+-- Sort by quantity
+SELECT *
+FROM products
+ORDER BY quantity DESC;
+
+
+-- ============================================
+-- 14. LIMIT
+-- ============================================
+
+-- Display first 5 products
+SELECT *
+FROM products
+LIMIT 5;
+
+
+-- Display top 3 expensive products
+SELECT *
+FROM products
+ORDER BY price DESC
+LIMIT 3;
+
+
+-- ============================================
+-- 15. DISTINCT
+-- ============================================
+
+SELECT DISTINCT category
+FROM products;
+
+
+-- ============================================
+-- 16. UPDATE
+-- ============================================
+
+-- Change laptop price
+UPDATE products
+SET price = 60000
+WHERE product_name = 'Laptop';
+
+
+-- Increase mouse quantity
+UPDATE products
+SET quantity = quantity + 10
+WHERE product_name = 'Mouse';
+
+
+-- Increase all Electronics prices by 5%
+UPDATE products
+SET price = price * 1.05
+WHERE category = 'Electronics';
+
+
+-- Check updated data
+SELECT * FROM products;
+
+
+-- ============================================
+-- 17. DELETE
+-- ============================================
+
+-- Delete one product
+DELETE FROM products
+WHERE product_name = 'USB Cable';
+
+
+-- Delete products with quantity less than 10
+DELETE FROM products
+WHERE quantity < 10;
+
+
+-- Check data
+SELECT * FROM products;
+
+
+-- ============================================
+-- 18. AGGREGATE FUNCTIONS
+-- ============================================
+
+-- Total quantity
+SELECT SUM(quantity) AS total_quantity
+FROM products;
+
+
+-- Average price
+SELECT AVG(price) AS average_price
+FROM products;
+
+
+-- Highest price
+SELECT MAX(price) AS highest_price
+FROM products;
+
+
+-- Lowest price
+SELECT MIN(price) AS lowest_price
+FROM products;
+
+
+-- Number of products
+SELECT COUNT(*) AS total_products
+FROM products;
+
+
+-- ============================================
+-- 19. GROUP BY
+-- ============================================
+
+-- Number of products in each category
+SELECT category, COUNT(*) AS total_products
+FROM products
+GROUP BY category;
+
+
+-- Average price of each category
+SELECT category, AVG(price) AS average_price
+FROM products
+GROUP BY category;
+
+
+-- Total quantity in each category
+SELECT category, SUM(quantity) AS total_quantity
+FROM products
+GROUP BY category;
+
+
+-- ============================================
+-- 20. HAVING
+-- ============================================
+
+-- Categories having more than 2 products
+SELECT category, COUNT(*) AS total_products
+FROM products
+GROUP BY category
+HAVING COUNT(*) > 2;
+
+
+-- Categories with average price above 5000
+SELECT category, AVG(price) AS average_price
+FROM products
+GROUP BY category
+HAVING AVG(price) > 5000;
+
+
+-- ============================================
+-- 21. ALTER TABLE - ADD COLUMN
+-- ============================================
+
+ALTER TABLE products
+ADD brand VARCHAR(50);
+
+
+-- Check table
+SELECT * FROM products;
+
+
+-- ============================================
+-- 22. UPDATE NEW COLUMN
+-- ============================================
+
+UPDATE products
+SET brand = 'Dell'
+WHERE product_name = 'Laptop';
+
+UPDATE products
+SET brand = 'Samsung'
+WHERE product_name = 'Mobile';
+
+UPDATE products
+SET brand = 'Logitech'
+WHERE product_name = 'Mouse';
+
+
+-- ============================================
+-- 23. ALTER TABLE - MODIFY COLUMN
+-- ============================================
+
+ALTER TABLE products
+MODIFY product_name VARCHAR(100);
+
+
+-- ============================================
+-- 24. ALTER TABLE - RENAME COLUMN
+-- ============================================
+
+ALTER TABLE products
+RENAME COLUMN quantity TO stock;
+
+
+-- Check
+SELECT * FROM products;
+
+
+-- ============================================
+-- 25. ALTER TABLE - ADD DEFAULT
+-- ============================================
+
+ALTER TABLE products
+ALTER stock SET DEFAULT 0;
+
+
+-- ============================================
+-- 26. RENAME TABLE
+-- ============================================
+
+ALTER TABLE products
+RENAME TO shopping_products;
+
+
+-- Check
+SELECT * FROM shopping_products;
+
+
+-- Rename back
+ALTER TABLE shopping_products
+RENAME TO products;
+
+
+-- ============================================
+-- 27. CREATE SECOND TABLE - CUSTOMERS
+-- ============================================
+
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_name VARCHAR(50),
+    email VARCHAR(100),
+    city VARCHAR(50)
+);
+
+
+-- ============================================
+-- 28. INSERT CUSTOMERS
+-- ============================================
+
+INSERT INTO customers
+(customer_name, email, city)
+VALUES
+('Ravi', 'ravi@gmail.com', 'Salem'),
+('Priya', 'priya@gmail.com', 'Chennai'),
+('Arun', 'arun@gmail.com', 'Coimbatore'),
+('Divya', 'divya@gmail.com', 'Salem');
+
+
+SELECT * FROM customers;
+
+
+-- ============================================
+-- 29. CREATE ORDERS TABLE
+-- ============================================
+
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT,
+    product_id INT,
+    order_date DATE,
+    quantity INT,
+    FOREIGN KEY (customer_id)
+        REFERENCES customers(customer_id),
+    FOREIGN KEY (product_id)
+        REFERENCES products(product_id)
+);
+
+
+-- ============================================
+-- 30. INSERT ORDERS
+-- ============================================
+
+INSERT INTO orders
+(customer_id, product_id, order_date, quantity)
+VALUES
+(1, 1, '2026-08-01', 1),
+(2, 2, '2026-08-02', 2),
+(3, 3, '2026-08-03', 1),
+(4, 5, '2026-08-04', 2);
+
+
+SELECT * FROM orders;
+
+
+-- ============================================
+-- 31. INNER JOIN
+-- ============================================
+
+SELECT
+    customers.customer_name,
+    products.product_name,
+    orders.quantity,
+    orders.order_date
+FROM orders
+INNER JOIN customers
+    ON orders.customer_id = customers.customer_id
+INNER JOIN products
+    ON orders.product_id = products.product_id;
+
+
+-- ============================================
+-- 32. JOIN WITH PRICE
+-- ============================================
+
+SELECT
+    customers.customer_name,
+    products.product_name,
+    products.price,
+    orders.quantity,
+    products.price * orders.quantity AS total_amount
+FROM orders
+JOIN customers
+    ON orders.customer_id = customers.customer_id
+JOIN products
+    ON orders.product_id = products.product_id;
+
+
+-- ============================================
+-- 33. TOTAL SALES
+-- ============================================
+
+SELECT
+    SUM(products.price * orders.quantity) AS total_sales
+FROM orders
+JOIN products
+    ON orders.product_id = products.product_id;
+
+
+-- ============================================
+-- 34. CUSTOMER-WISE ORDERS
+-- ============================================
+
+SELECT
+    customers.customer_name,
+    COUNT(orders.order_id) AS total_orders
+FROM customers
+JOIN orders
+    ON customers.customer_id = orders.customer_id
+GROUP BY customers.customer_name;
+
+
+-- ============================================
+-- 35. PRODUCT-WISE SALES
+-- ============================================
+
+SELECT
+    products.product_name,
+    SUM(orders.quantity) AS total_sold
+FROM products
+JOIN orders
+    ON products.product_id = orders.product_id
+GROUP BY products.product_name;
+
+
+-- ============================================
+-- 36. DESCRIBE TABLE
+-- ============================================
+
+DESCRIBE products;
+
+DESCRIBE customers;
+
+DESCRIBE orders;
+
+
+-- ============================================
+-- 37. SHOW TABLES
+-- ============================================
+
+SHOW TABLES;
+
+
+-- ============================================
+-- 38. SHOW DATABASES
+-- ============================================
+
+SHOW DATABASES;
+
+
+-- ============================================
+-- 39. TRUNCATE
+-- ============================================
+
+-- WARNING:
+-- This removes ALL records from the table.
+
+-- TRUNCATE TABLE products;
+
+
+-- ============================================
+-- 40. DROP TABLE
+-- ============================================
+
+-- WARNING:
+-- This permanently removes the table.
+
+-- DROP TABLE products;
+
+
+-- ============================================
+-- 41. DROP DATABASE
+-- ============================================
+
+-- WARNING:
+-- This removes the complete database.
+
+-- DROP DATABASE shopping;
