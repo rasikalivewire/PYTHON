@@ -5,3 +5,26 @@ winsound.Beep(2000,2000)
 winsound.PlaySound("sound.wav", winsound.SND_FILENAME)
 winsound.MessageBeep()
 winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
+import wave
+import math
+import struct
+import winsound
+
+filename = r"C:\Users\gavas\Downloads\test.wav"
+
+sample_rate = 44100
+duration = 2
+frequency = 1000
+
+with wave.open(filename, "w") as wav:
+    wav.setnchannels(1)
+    wav.setsampwidth(2)
+    wav.setframerate(sample_rate)
+
+    for i in range(sample_rate * duration):
+        value = int(32767 * math.sin(2 * math.pi * frequency * i / sample_rate))
+        wav.writeframes(struct.pack("<h", value))
+
+print("WAV created")
+
+winsound.PlaySound(filename, winsound.SND_FILENAME)
