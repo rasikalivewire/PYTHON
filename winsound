@@ -1,0 +1,7 @@
+import winsound
+winsound.Beep(500,2000)
+winsound.Beep(1000,2000)
+winsound.Beep(2000,2000)
+winsound.PlaySound("sound.wav", winsound.SND_FILENAME)
+winsound.MessageBeep()
+winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
