@@ -1,0 +1,95 @@
+import os
+
+# 1. Get Current Working Directory
+print("1. Current Directory:")
+print(os.getcwd())
+
+
+# 2. Create Main Folder
+main_folder = "Hospital"
+
+if not os.path.exists(main_folder):
+    os.mkdir(main_folder)
+    print("\n2. Hospital Folder Created")
+else:
+    print("\n2. Hospital Folder Already Exists")
+
+
+# 3. Create Nested Directories
+path = os.path.join(main_folder, "Patients", "Reports")
+
+os.makedirs(path, exist_ok=True)
+
+print("\n3. Nested Folders Created")
+
+
+# 4. List Files and Folders
+print("\n4. Available Folders:")
+print(os.listdir(main_folder))
+
+
+# 5. Create a File
+file_path = os.path.join(path, "patient.txt")
+
+with open(file_path, "w") as file:
+    file.write("Patient Name: Arun\n")
+    file.write("Age: 25\n")
+    file.write("Department: Cardiology\n")
+
+print("\n5. Patient File Created")
+
+
+# 6. Check File Exists
+if os.path.exists(file_path):
+    print("\n6. Patient File Exists")
+else:
+    print("\n6. Patient File Not Found")
+
+
+# 7. Check Whether It Is a File or Directory
+print("\n7. Is File:", os.path.isfile(file_path))
+print("Is Directory:", os.path.isdir(path))
+
+
+# 8. Get File Size
+print("\n8. File Size:", os.path.getsize(file_path), "Bytes")
+
+
+# 9. Rename File
+new_path = os.path.join(path, "patient_record.txt")
+
+os.rename(file_path, new_path)
+
+print("\n9. File Renamed Successfully")
+
+
+# 10. List Files Inside Reports Folder
+print("\n10. Report Files:")
+print(os.listdir(path))
+
+
+# 11. Change Current Directory
+os.chdir(path)
+
+print("\n11. Changed Directory:")
+print(os.getcwd())
+
+
+# 12. Return to Original Directory
+os.chdir(os.path.dirname(os.path.dirname(os.path.dirname(os.getcwd()))))
+
+print("\n12. Returned to Original Directory:")
+print(os.getcwd())
+
+
+# 13. Remove File
+os.remove(os.path.join(path, "patient_record.txt"))
+
+print("\n13. Patient File Deleted")
+
+
+# 14. Remove Empty Directories
+os.rmdir(path)
+os.rmdir(os.path.join(main_folder, "Patients"))
+
+print("\n14. Empty Directories Removed")
