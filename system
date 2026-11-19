@@ -48,3 +48,43 @@ print("\n12. Program Completed")
 
 # Uncomment to terminate the program explicitly
 # sys.exit()
+import sys
+
+# 1. Python Version
+print("Python Version:", sys.version)
+
+# 2. Operating System
+print("Operating System:", sys.platform)
+
+# 3. Python Executable
+print("Python Location:", sys.executable)
+
+# 4. Command Line Arguments
+print("Command Line Arguments:", sys.argv)
+
+# 5. Module Search Path
+print("Module Search Path:", sys.path[:2])
+
+# 6. Maximum Integer Size
+print("Maximum Integer:", sys.maxsize)
+
+# 7. Student Details
+print("\nEnter Student Name:")
+name = sys.stdin.readline().strip()
+
+print("Enter Student Mark:")
+mark = sys.stdin.readline().strip()
+
+# 8. Display Output
+sys.stdout.write("\nStudent Details\n")
+sys.stdout.write("Name: " + name + "\n")
+sys.stdout.write("Mark: " + mark + "\n")
+
+# 9. Memory Size
+print("Memory Used:", sys.getsizeof(mark), "Bytes")
+
+# 10. Error Message Example
+if not mark.isdigit():
+    sys.stderr.write("Invalid Mark!\n")
+
+print("Program Completed")
