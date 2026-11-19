@@ -1,0 +1,104 @@
+from bs4 import BeautifulSoup
+
+# Sample HTML webpage
+html = """
+<html>
+<head>
+    <title>Online Shopping</title>
+</head>
+<body>
+
+    <h1>Available Products</h1>
+
+    <div class="product">
+        <h2>Laptop</h2>
+        <p class="price">45000</p>
+        <a href="laptop.html">View Product</a>
+    </div>
+
+    <div class="product">
+        <h2>Mobile</h2>
+        <p class="price">20000</p>
+        <a href="mobile.html">View Product</a>
+    </div>
+
+    <div class="product">
+        <h2>Headphones</h2>
+        <p class="price">1500</p>
+        <a href="headphones.html">View Product</a>
+    </div>
+
+</body>
+</html>
+"""
+
+# 1. Create BeautifulSoup Object
+soup = BeautifulSoup(html, "html.parser")
+
+# 2. Display Formatted HTML
+print("1. Formatted HTML:")
+print(soup.prettify())
+
+# 3. Get Website Title
+print("\n2. Website Title:")
+print(soup.title.get_text())
+
+# 4. Find First Heading
+print("\n3. Main Heading:")
+print(soup.find("h1").get_text())
+
+# 5. Find All Product Names
+print("\n4. Product Names:")
+
+products = soup.find_all("h2")
+
+for product in products:
+    print(product.get_text())
+
+# 6. Extract All Prices
+print("\n5. Product Prices:")
+
+prices = soup.find_all("p", class_="price")
+
+for price in prices:
+    print(price.get_text())
+
+# 7. Extract Links
+print("\n6. Product Links:")
+
+links = soup.find_all("a")
+
+for link in links:
+    print(link.get("href"))
+
+# 8. Extract Complete Webpage Text
+print("\n7. Complete Webpage Text:")
+print(soup.get_text(" ", strip=True))
+
+# 9. CSS Selector
+print("\n8. Products Using CSS Selector:")
+
+items = soup.select(".product")
+
+for item in items:
+    print(item.h2.get_text())
+
+# 10. Select First Product
+print("\n9. First Product:")
+
+first_product = soup.select_one(".product")
+
+print(first_product.h2.get_text())
+
+# 11. Check Attribute
+print("\n10. Check Link Attribute:")
+
+if links[0].has_attr("href"):
+    print("Link Attribute Exists")
+
+# 12. Find Parent
+print("\n11. Product Parent:")
+
+parent = products[0].find_parent("div")
+
+print(parent.get("class"))
