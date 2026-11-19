@@ -1,0 +1,50 @@
+import sys
+
+# 1. Python Version
+print("1. Python Version:")
+print(sys.version)
+
+# 2. Python Version Information
+print("\n2. Version Information:")
+print(sys.version_info)
+
+# 3. Python Executable Location
+print("\n3. Python Executable:")
+print(sys.executable)
+
+# 4. Operating System Platform
+print("\n4. Platform:")
+print(sys.platform)
+
+# 5. Command Line Arguments
+print("\n5. Command Line Arguments:")
+print(sys.argv)
+
+# 6. Python Module Search Paths
+print("\n6. Module Search Path:")
+print(sys.path[:3])
+
+# 7. Maximum Integer Size Indicator
+print("\n7. Maximum Integer Size:")
+print(sys.maxsize)
+
+# 8. Memory Size of an Object
+quantity = 100
+print("\n8. Memory Size:")
+print(sys.getsizeof(quantity), "Bytes")
+
+# 9. Standard Input
+print("\n9. Enter Patient Name:")
+name = sys.stdin.readline().strip()
+
+# 10. Standard Output
+sys.stdout.write("Patient Name: " + name + "\n")
+
+# 11. Standard Error
+sys.stderr.write("Sample Error Message\n")
+
+# 12. Exit Example
+print("\n12. Program Completed")
+
+# Uncomment to terminate the program explicitly
+# sys.exit()
